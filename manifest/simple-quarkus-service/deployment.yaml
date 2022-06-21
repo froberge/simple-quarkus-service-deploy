@@ -19,7 +19,7 @@ spec:
         app: simple-quarkus-service
     spec:
       containers:
-      - image: quay.io/froberge/simple-quarkus-service:dev-tag
+      - image: quay.io/froberge/simple-quarkus-service:v4
         name: simple-quarkus-service
         resources: {}
 ---
