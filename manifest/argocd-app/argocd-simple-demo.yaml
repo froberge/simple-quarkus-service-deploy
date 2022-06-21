@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: manifest/simple-quarkus-service
-    repoURL: https://github.com/redhat-developer-demos/openshift-gitops-examples
+    repoURL: https://github.com/froberge/simple-argocd-demo
     targetRevision: main
   syncPolicy:
     automated:
