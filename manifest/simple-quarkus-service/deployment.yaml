@@ -5,7 +5,7 @@ metadata:
   labels:
     app: simple-quarkus-service
   name: simple-quarkus-service
-  namespace: argocd-simple-demo
+
 spec:
   replicas: 1
   selector:
@@ -19,7 +19,7 @@ spec:
         app: simple-quarkus-service
     spec:
       containers:
-      - image: quay.io/froberge/simple-quarkus-service:v4
-        name: simple-quarkus-service
+      - name: simple-quarkus-service
+        image: quay.io/froberge/simple-quarkus-service:v1
         resources: {}
 ---

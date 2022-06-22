@@ -5,12 +5,12 @@ metadata:
   labels:
     app: simple-quarkus-service
   name: simple-quarkus-service
-  namespace: argocd-simple-demo
+
 spec:
+  selector:
+    app: simple-quarkus-service
   ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
-  selector:
-    app: simple-quarkus-service
 ---

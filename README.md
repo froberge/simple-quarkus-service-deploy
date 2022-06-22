@@ -1,3 +1,5 @@
-# simple-argocd-demo
+# Simple Quarkus Service Deploy
 
-Code to deploy the simple quarkus service with argocd
+This repository contains the different manifest needed to deploy the Simple Quarkus Service code to an OpenShift/Kubernetes clusters.
+
+

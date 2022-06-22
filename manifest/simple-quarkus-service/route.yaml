@@ -4,7 +4,7 @@ metadata:
   labels:
     app: simple-quarkus-service
   name: simple-quarkus-service
-  namespace: argocd-simple-demo
+  
 spec:
   port:
     targetPort: 8080
