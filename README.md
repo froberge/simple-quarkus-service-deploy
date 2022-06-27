@@ -87,7 +87,8 @@ echo "$(oc  get route el-github-webhook -n pipeline-demo-simple-quarkus  --templ
     ![Webhook](/docs/images/github-webhook.png)
 
     You can now push a change to the repository, it should trigger the pipeline.
-7. Open OpenShidt console and validate the the pipeline is running.
+    
+7. Open OpenShift console and validate the the pipeline is running.
 
 ### Deploy Using OpenShift GitOps
 
