@@ -69,14 +69,14 @@ We assume that you are in the folder that you have clone/fork the code.
     ```
 4. Let's expose the trigger service
     ```
-    oc expose svc el-github-webhook
+    oc expose svc el-github-webhook -n pipeline-demo-simple-quarkus
     ```
     ```
-    oc get route el-github-webhook
+    oc get route el-github-webhook -n pipeline-demo-simple-quarkus
     ```
 5. Retrive the trigger url.
 ```
-echo "URL: $(oc  get route el-github-webhook --template='http://{{.spec.host}}')"
+echo "$(oc  get route el-github-webhook -n pipeline-demo-simple-quarkus  --template='http://{{.spec.host}}')"
 ```
 6. Create the GitHub Webhook
 
