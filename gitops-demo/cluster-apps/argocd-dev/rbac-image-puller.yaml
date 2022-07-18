@@ -25,5 +25,5 @@ roleRef:
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
-  name: system:serviceaccounts: simple-quarkus-prod
+  name: system:serviceaccounts:simple-quarkus-prod
 ...
