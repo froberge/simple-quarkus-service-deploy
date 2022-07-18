@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: openshift-gitops
 
 resources:
-  - /argocd-dev
-  - /namespaces
-  - /tekton
+  - argocd-dev/
+  - namespaces/
+  - tekton/
