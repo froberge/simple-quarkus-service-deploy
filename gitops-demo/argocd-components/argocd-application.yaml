@@ -2,7 +2,7 @@ kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
   name: argocd-dev
-  # namespace: openshift-gitops
+  namespace: openshift-gitops
 spec:
   destination:
     namespace: simple-quarkus-gitops

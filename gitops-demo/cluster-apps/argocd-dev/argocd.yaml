@@ -51,5 +51,3 @@ spec:
       kinds:
       - ComplianceCheckResult
       - ComplianceRemediation
-  rbac:
-    defaultPolicy: role:admin
