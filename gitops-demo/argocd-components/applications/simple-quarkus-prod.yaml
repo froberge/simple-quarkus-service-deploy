@@ -1,0 +1,13 @@
+kind: Application
+metadata:
+  name: simple-quarkus-dev
+spec:
+  project: simple-quarkus
+  source:
+    path: gitops-demo/simple-quarkus-service-deploy/app/overlays/prod
+    repoURL: https://github.com/froberge/simple-quarkus-service-deploy.git
+    targetRevision: main
+  destination:
+    namespace: simple-quarkus-dev
+    server: https://kubernetes.default.svc
+  syncPolicy: {}
