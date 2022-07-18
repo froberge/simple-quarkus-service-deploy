@@ -2,8 +2,8 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: system:image-puller:coffeeshop-dev
-  namespace: coffeeshop-pipeline
+  name: system:image-puller:simple-quarkus-dev
+  namespace:  simple-quarkus-pipeline
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -11,13 +11,13 @@ roleRef:
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
-  name: system:serviceaccounts:coffeeshop-dev
+  name: system:serviceaccounts:simple-quarkus-dev
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: system:image-puller:coffeeshop-prod
-  namespace: coffeeshop-pipeline
+  name: system:image-puller:simple-quarkus-prod
+  namespace:  simple-quarkus-pipeline
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -25,5 +25,5 @@ roleRef:
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
-  name: system:serviceaccounts:coffeeshop-prod
+  name: system:serviceaccounts: simple-quarkus-prod
 ...
