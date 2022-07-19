@@ -5,7 +5,7 @@ namespace: simple-quarkus-pipeline
 resources:
   - workspaces/source-pvc.yaml
   - workspaces/maven-repo-pvc.yaml
-  - task/
+  - task
   - pipelines/simple-quarkus-service-gitops.yaml
   - triggers/simple-quarkus-service-trigger-template.yaml
   - triggers/github-pr-trigger-binding.yaml
