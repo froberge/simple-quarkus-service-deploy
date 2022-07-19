@@ -10,5 +10,5 @@ resources:
   - namespace.yaml
   - secret.yaml
   - argocd.yaml
-#  - rbac.yaml
+  - rbac.yaml
 #  - rbac-image-puller.yaml
