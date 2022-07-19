@@ -6,9 +6,9 @@ namespace: simple-quarkus-gitops
 bases:
   - ../applications
 
-#resources:
-  # - namespace.yaml
-  # - secret.yaml
+resources:
+  - namespace.yaml
+  - secret.yaml
   # - argocd.yaml
   # - rbac.yaml
   # - rbac-image-puller.yaml
