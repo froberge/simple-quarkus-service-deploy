@@ -3,10 +3,11 @@ kind: Kustomization
 
 bases:
   - ../argocd-components/argocd-dev-instance
+  - tekton
+  
 
 resources:
   - namespaces/simple-quarkus-dev.yaml
   - namespaces/simple-quarkus-prod.yaml
   - namespaces/simple-quarkus-pipeline.yaml
   - namespaces/rbac-developer.yaml
-  #- tekton
