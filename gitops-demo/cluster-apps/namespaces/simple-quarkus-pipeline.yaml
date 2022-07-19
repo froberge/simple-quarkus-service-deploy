@@ -4,6 +4,6 @@ metadata:
   annotations:
     openshift.io/description: Tekton pipelines for simple-quarkus project
     openshift.io/display-name: Tekton pipelines for simple-quarkus project
-  name: simple-quarkus-pipeline
-spec: {}
-status: {}
+  labels:
+    argocd.argoproj.io/managed-by: simple-quarkus-gitops
+  name: simple-quarkus-pipelin
