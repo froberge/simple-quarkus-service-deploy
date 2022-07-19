@@ -6,7 +6,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
-  persistentVolumeReclaimPolicy: Retain
   resources:
     requests:
       storage: 5Gi
