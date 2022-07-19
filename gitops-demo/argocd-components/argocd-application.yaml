@@ -9,7 +9,7 @@ spec:
   project: argocd-dev
   source:
     path: gitops-demo/cluster-apps
-    repoURL: https://github.com/froberge/simple-quarkus-service-deploy
+    repoURL: https://github.com/froberge/simple-quarkus-service-deploy.git
     targetRevision: main
   syncPolicy:
     automated:
