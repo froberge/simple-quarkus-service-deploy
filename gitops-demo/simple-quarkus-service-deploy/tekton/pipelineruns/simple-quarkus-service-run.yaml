@@ -20,6 +20,9 @@ spec:
     - name: VERSION
       value: openjdk-11-el7
   workspaces:
-    - name: workspace
+    - name: sources-pvc
       persistentVolumeClaim:
         claimName: sources-pvc
+    - name:  maven-repo-pvc
+      persistentVolumeClaim:
+        claimName:  maven-repo-pvc
