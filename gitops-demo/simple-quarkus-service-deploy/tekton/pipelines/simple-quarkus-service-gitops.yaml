@@ -40,7 +40,7 @@ spec:
         name: git-clone
       workspaces:
         - name: output
-          workspace: sources-pvc
+          workspace: source
     - name: create-image-tag
       params:
         - name: commit
@@ -55,7 +55,7 @@ spec:
         - clone-repository
       workspaces:
       - name: tagoutput
-        workspace: sources-pvc
+        workspace: source
     - name: test-app
       taskRef:
         name: maven
@@ -71,7 +71,7 @@ spec:
         - name: maven-settings
           workspace: maven-repo-pvc
         - name: source
-          workspace: sources-pvc
+          workspace: source
     - name: build
       params:
         - name: IMAGE
@@ -90,7 +90,7 @@ spec:
         name: s2i-java
       workspaces:
         - name: source
-          workspace: sources-pvc
+          workspace: source
     # - name: deploy
     #   params:
     #     - name: SCRIPT
@@ -101,5 +101,5 @@ spec:
     #     kind: ClusterTask
     #     name: openshift-client
   workspaces:
-    - name: sources-pvc
-    - name: maven-repo-pvc
+    - name: source
+    - name: maven-repo

@@ -109,22 +109,32 @@ __NOTE__
 * `The Developer Argo CD instance` will be deploy in it own namespaces and is intented for the developper to use to manage the application.
 
 1. Login to you cluster using the CLI
-1. Make sure you are in the gitops-demo folder
-`.../gitops-demo/`
 
-1. UsE `Kustomize` create the different resources needed to run the demo 
+1. Use kKustomize` create the different resources needed to run the demo 
     ```
-    until oc apply -k setup/overlays/demo
-    do
-      sleep 10
-    done
+    oc apply -k gitops-demo/setup/overlays/demo
     ```
 
-```
-1. Create the argocd project 
-    ```
-    oc apply -f manifest/argocd-app/argocd-simple-demo.yaml
-    ```
+    This will create all the elements required    
+        * __simple-quarkus-gitops__ - The namespace where the argoCD instance for Developer will be install.
+        * __simple-quarkus-pipeline__ - The namespaces where the pipeline resources will be install.
+        * __simple-quarkus-dev__ - The `DEV` environment for the demo.
+        * __simple-quarkus-prod__ - The `PROD` environment for the demo.
+1.  Create the GitHub Webhook
+    * Retrive the trigger url.
+        
+        ```
+        echo "$(oc  get route el-github-webhook -n simple-quarkus-pipeline  --template='http://{{.spec.host}}')"
+        ```
+
+    * Open [GitHub](https://github.com/)  in the right repository, go to setting -> Webhook -> Add Webhook
+
+    ![Webhook](/docs/images/github-webhook.png)
+
+    You can now push a change to the repository, it should trigger the pipeline. 
+---
+
+
 1. Connect to OpenShift Web Console you should now have access to the project and the service
 1. Connect to argoCD you should see the argoCD project.
 1. Commit change to the deployment file and see what happens.
