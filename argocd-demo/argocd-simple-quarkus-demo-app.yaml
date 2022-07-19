@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-simple-quarkus-demo
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: argocd-simple-quarkus-demo
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: pipeline-demo/app
+    repoURL: https://github.com/froberge/simple-argocd-demo
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
