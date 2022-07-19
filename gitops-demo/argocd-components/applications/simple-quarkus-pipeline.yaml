@@ -5,7 +5,7 @@ metadata:
 spec:
   project: simple-quarkus
   source:
-    path: tekton/
+    path: tekton
     repoURL: https://github.com/froberge/simple-quarkus-service-deploy.git
 
     targetRevision: main
