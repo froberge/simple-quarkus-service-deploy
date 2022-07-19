@@ -9,6 +9,6 @@ spec:
     repoURL: https://github.com/froberge/simple-quarkus-service-deploy.git
     targetRevision: main
   destination:
-    namespace: simple-quarkus-dev
+    namespace: simple-quarkus-prod
     server: https://kubernetes.default.svc
   syncPolicy: {}
