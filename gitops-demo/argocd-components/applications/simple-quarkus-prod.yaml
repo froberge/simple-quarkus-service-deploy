@@ -1,6 +1,6 @@
 kind: Application
 metadata:
-  name: simple-quarkus-dev
+  name: simple-quarkus-prod
 spec:
   project: simple-quarkus
   source:
