@@ -8,5 +8,5 @@ spec:
     targetPort: 8000
   to:
     kind: Service
-    name: github-webhook
+    name: el-github-webhook
     weight: 100
