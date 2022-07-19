@@ -10,3 +10,4 @@ resources:
   - triggers/simple-quarkus-service-trigger-template.yaml
   - triggers/github-pr-trigger-binding.yaml
   - triggers/github-eventlistener.yaml
+  - triggers/listener-routes.yaml
