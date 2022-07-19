@@ -69,7 +69,7 @@ spec:
             - 'test'
       workspaces:
         - name: maven-settings
-          workspace: maven-repo-pvc
+          workspace: m2-repo
         - name: source
           workspace: source
     - name: build
@@ -102,4 +102,4 @@ spec:
     #     name: openshift-client
   workspaces:
     - name: source
-    - name: maven-repo
+    - name: m2-repo

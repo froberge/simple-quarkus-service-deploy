@@ -38,6 +38,6 @@ spec:
           - name: source
             persistentVolumeClaim:
               claimName: sources-pvc
-          - name: maven-repo
+          - name: m2-repo
             persistentVolumeClaim:
               claimName: maven-repo-pvc
