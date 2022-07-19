@@ -51,6 +51,9 @@ We assume that you are in the folder that you have clone/fork the code.
 We assume that you are in the folder that you have clone/fork the code. For instructions on how to install OpenShift Pipiline you can refer to my [OpenShift Pipeline Demo](https://github.com/froberge/ocp-pipeline-demo) in this [section](https://github.com/froberge/ocp-pipeline-demo/blob/main/docs/install-pipeline-operator.md)
 
 1. Login to you cluster using the CLI
+1. Make sure you are in the pipeline-demo folder
+`.../pipeline-demo/`
+
 1. Using `Kustomize` create the different resources needed to run the demo
     ```
     oc apply -k pipeline-demo
@@ -103,9 +106,21 @@ In this section we will be demontrating how to use `OpenShift` gitops to manage 
 __NOTE__
 *   The default `cluster` instance of Argo CD is meant for cluster admin tasks like creating namespace managing role bindings not for day to day application management.
 
-* `The Developer Argo CD instance` will ne deploy in it own namespaces and is intented for the developper to use to manage the application.
+* `The Developer Argo CD instance` will be deploy in it own namespaces and is intented for the developper to use to manage the application.
 
 1. Login to you cluster using the CLI
+1. Make sure you are in the gitops-demo folder
+`.../gitops-demo/`
+
+1. UsE `Kustomize` create the different resources needed to run the demo 
+    ```
+    until oc apply -k setup/overlays/demo
+    do
+      sleep 10
+    done
+    ```
+
+```
 1. Create the argocd project 
     ```
     oc apply -f manifest/argocd-app/argocd-simple-demo.yaml
