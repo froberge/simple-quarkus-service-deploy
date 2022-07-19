@@ -8,7 +8,6 @@ metadata:
     pipeline.openshift.io/runtime-version: openjdk-11-el7
     pipeline.openshift.io/type: kubernetes
   name: simple-quarkus-service-gitops
-  namespace: pipeline-demo
 spec:
   params:
     - default: simple-quarkus-service
@@ -21,7 +20,7 @@ spec:
       name: GIT_REVISION
       type: string
     - default: >-
-        image-registry.openshift-image-registry.svc:5000/pipeline-demo/simple-quarkus-service
+        image-registry.openshift-image-registry.svc:5000/simple-quarkus-pipeline/simple-quarkus-service
       name: IMAGE_NAME
       type: string
     - default: openjdk-11-el7
@@ -41,7 +40,7 @@ spec:
         name: git-clone
       workspaces:
         - name: output
-          workspace: workspace
+          workspace: sources-pvc
     - name: create-image-tag
       params:
         - name: commit
@@ -56,7 +55,7 @@ spec:
         - clone-repository
       workspaces:
       - name: tagoutput
-        workspace: workspace
+        workspace: sources-pvc
     - name: test-app
       taskRef:
         name: maven
@@ -70,9 +69,9 @@ spec:
             - 'test'
       workspaces:
         - name: maven-settings
-          workspace: m2-repo
+          workspace: maven-repo-pvc
         - name: source
-          workspace: workspace
+          workspace: sources-pvc
     - name: build
       params:
         - name: IMAGE
@@ -91,7 +90,7 @@ spec:
         name: s2i-java
       workspaces:
         - name: source
-          workspace: workspace
+          workspace: sources-pvc
 
           
     # - name: deploy
@@ -104,5 +103,5 @@ spec:
     #     kind: ClusterTask
     #     name: openshift-client
   workspaces:
-    - name: workspace
-    - name: m2-repo
+    - name: sources-pvc
+    - name: maven-repo-pvc
