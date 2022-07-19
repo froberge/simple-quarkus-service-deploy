@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: simple-quarkus-dev
 
 resources:
-- ../../base
+- ../../base/
 
 patchesJson6902:
 - path: deployment-patch.yaml
