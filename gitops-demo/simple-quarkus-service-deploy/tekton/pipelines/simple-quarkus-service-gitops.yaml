@@ -154,6 +154,6 @@ spec:
   workspaces:
     - name: source
     - name: m2-repo
-    - description: This is a scratch disk
-      name: scratch
+    - name: scratch
+      description: This is a scratch disk
 
