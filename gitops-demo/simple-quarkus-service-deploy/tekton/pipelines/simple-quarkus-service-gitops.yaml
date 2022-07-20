@@ -126,7 +126,7 @@ spec:
         - name: overlaypath
           value: $(params.DEV_OVERLAY_DIR)
       runAfter:
-        - clone-deploy-repo
+        - clone-deployment-repo
       workspaces:
         - name: source
           workspace: source
