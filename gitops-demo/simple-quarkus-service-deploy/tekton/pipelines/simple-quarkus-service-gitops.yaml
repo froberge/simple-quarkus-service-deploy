@@ -126,7 +126,7 @@ spec:
         - name: overlaypath
           value: $(params.DEV_OVERLAY_DIR)
       runAfter:
-        - set-image-tag
+        - create-image-tag
         - clone-deployment-repo
       workspaces:
         - name: source
