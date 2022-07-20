@@ -30,14 +30,14 @@ spec:
             value: '$(tt.params.gitrepositoryurl)'
           - name: GITHUB_REPO_REVISION
             value: '$(tt.params.gitrevision)'
-          - name: DEPLOY__GIT_REPO
+          - name: DEPLOY_GIT_REPO
             value: 'https://github.com/froberge/simple-quarkus-service-deploy'
           - name: DEPLOY_GIT_REVISION
-          - value: main            
+            value: main            
           - name: DEV_OVERLAY_DIR
-          - value: gitops-demo/simple-quarkus-service-deploy/app/overlays/dev
+            value: gitops-demo/simple-quarkus-service-deploy/app/overlays/dev
           - name: PROD_OVERLAY_DIR
-          - value: gitops-demo/simple-quarkus-service-deploy/app/overlays/prod
+            value: gitops-demo/simple-quarkus-service-deploy/app/overlays/prod
           - name: PATH_CONTEXT
             value: .
           - name: VERSION

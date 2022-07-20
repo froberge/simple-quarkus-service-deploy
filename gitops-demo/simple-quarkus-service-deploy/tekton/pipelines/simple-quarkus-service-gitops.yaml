@@ -20,7 +20,7 @@ spec:
       name: GIT_REVISION
       type: string
     - default: 'https://github.com/froberge/simple-quarkus-service-deploy'
-      name: DEPLOY__GIT_REPO
+      name: DEPLOY_GIT_REPO
       type: string
     - default: main
       name: DEPLOY_GIT_REVISION
@@ -106,7 +106,7 @@ spec:
     - name: clone-deployment-repo
       params:
       - name: url
-        value: $(params.DEPLOY__GIT_REPO)
+        value: $(params.DEPLOY_GIT_REPO)
       - name: revision
         value: $(params.DEPLOY_GIT_REVISION)
       taskRef:
