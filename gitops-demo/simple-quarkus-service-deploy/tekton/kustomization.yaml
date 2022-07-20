@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: simple-quarkus-pipeline
 
 bases:
-  - workspace 
+  - workspaces
   - task
   - pipelines
   - triggers
