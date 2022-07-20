@@ -108,7 +108,7 @@ spec:
       - name: url
         value: $(params.DEPLOY__GIT_REPO)
       - name: revision
-        value: $(params.DEPLOY__GIT_REVISION)
+        value: $(params.DEPLOY_GIT_REVISION)
       taskRef:
         name: git-clone
         kind: ClusterTask
