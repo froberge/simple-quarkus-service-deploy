@@ -133,9 +133,9 @@ spec:
     - name: commit-to-dev
       params:
       - name: GIT_USER_NAME
-        value: developer
+        value: froberge
       - name: GIT_USER_EMAIL
-        value: developer@example.com
+        value: roberge.felix@gmail.com
       - name: GIT_SCRIPT
         value: |
           git add -A .
