@@ -152,15 +152,6 @@ spec:
         workspace: source
       - name: input
         workspace: scratch
-    # - name: deploy
-    #   params:
-    #     - name: SCRIPT
-    #       value: oc rollout status deploy/$(params.APP_NAME)
-    #   runAfter:
-    #     - build
-    #   taskRef:
-    #     kind: ClusterTask
-    #     name: openshift-client
   workspaces:
     - name: source
     - name: m2-repo
