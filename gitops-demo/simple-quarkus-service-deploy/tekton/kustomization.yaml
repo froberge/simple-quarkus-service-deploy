@@ -7,7 +7,6 @@ resources:
   - workspaces/source-pvc.yaml
   - pipelines/simple-quarkus-service-gitops.yaml
   - pipelines/github-secret.yaml
-  - pipelines/serviceaccount-yaml
   - task/set-image-tag.yaml
   - task/kustomize-task.yaml
   - triggers/github-eventlistener.yaml
