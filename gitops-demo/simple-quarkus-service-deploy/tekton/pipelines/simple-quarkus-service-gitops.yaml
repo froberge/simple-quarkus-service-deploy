@@ -19,6 +19,18 @@ spec:
     - default: main
       name: GIT_REVISION
       type: string
+    - default: 'https://github.com/froberge/simple-quarkus-service-deploy'
+      name: DEPLOY__GIT_REPO
+      type: string
+    - default: main
+      name: DEPLOY_GIT_REVISION
+      type: string
+    - default: gitops-demo/simple-quarkus-service-deploy/app/overlays/dev
+      name: DEV_OVERLAY_DIR
+      type: string
+    - default: gitops-demo/simple-quarkus-service-deploy/app/overlays/prod
+      name: PROD_OVERLAY_DIR
+      type: string
     - default: >-
         image-registry.openshift-image-registry.svc:5000/simple-quarkus-pipeline/simple-quarkus-service
       name: IMAGE_NAME
@@ -91,6 +103,54 @@ spec:
       workspaces:
         - name: source
           workspace: source
+    - name: clone-deployment-repo
+      params:
+      - name: url
+        value: $(params.DEPLOY__GIT_REPO)
+      - name: revision
+        value: $(params.DEPLOY__GIT_REVISION)
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      runAfter:
+        - build
+      workspaces:
+      - name: output
+        workspace: source
+    - name: patch-dev
+      taskRef:
+        name: kustomize
+      params:
+        - name: imagestream
+          value: $(tasks.set-image-tag.results.tag)
+        - name: overlaypath
+          value: $(params.DEV_OVERLAY_DIR)
+      runAfter:
+        - clone-deploy-repo
+      workspaces:
+        - name: source
+          workspace: source
+    - name: commit-to-dev
+      params:
+      - name: GIT_USER_NAME
+        value: developer
+      - name: GIT_USER_EMAIL
+        value: developer@example.com
+      - name: GIT_SCRIPT
+        value: |
+          git add -A .
+          git commit -am "Run $(tasks.set-image-tag.results.tagref): Updating image to $(tasks.set-image-tag.results.tag) on $(params.DEV_OVERLAY_DIR)"
+          git push origin HEAD:main
+      taskRef:
+        name: git-cli
+        kind: ClusterTask
+      runAfter:
+        - patch-dev
+      workspaces:
+      - name: source
+        workspace: source
+      - name: input
+        workspace: scratch
     # - name: deploy
     #   params:
     #     - name: SCRIPT
