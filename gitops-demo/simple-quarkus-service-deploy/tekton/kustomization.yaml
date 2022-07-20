@@ -4,7 +4,7 @@ namespace: simple-quarkus-pipeline
 
 resources:
   - workspaces/maven-repo-pvc.yaml
-  - workspaces/sources-pvc.yaml
+  - workspaces/source-pvc.yaml
   - pipelines/simple-quarkus-service-gitops.yaml
   - task/set-image-tag.yaml
   - taks/kustomize-task.yaml
