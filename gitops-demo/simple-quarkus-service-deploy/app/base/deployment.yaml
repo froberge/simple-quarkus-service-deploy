@@ -4,17 +4,6 @@ metadata:
   labels:
     app: simple-quarkus-service
     app.openshift.io/runtime: quarkus
-  # annotations:
-  #   image.openshift.io/triggers: |-
-  #     [
-  #       {
-  #         "from": {
-  #           "kind": "ImageStreamTag",
-  #           "name": "simple-quarkus-service:latest"
-  #         },
-  #         "fieldPath": "spec.template.spec.containers[?(@.name==\"simple-quarkus-service\")].image"
-  #       }
-  #     ]
   name: simple-quarkus-service
 spec:
   replicas: 1

@@ -133,9 +133,9 @@ spec:
     - name: commit-to-dev
       params:
       - name: GIT_USER_NAME
-        value: froberge
+        value: simple-quarkus-pipeline-bot
       - name: GIT_USER_EMAIL
-        value: roberge.felix@gmail.com
+        value: simple-quarkus-pipeline-bot@demo.com
       - name: GIT_SCRIPT
         value: |
           git add -A .
