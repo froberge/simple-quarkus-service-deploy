@@ -7,7 +7,6 @@ spec:
   source:
     path: gitops-demo/simple-quarkus-service-deploy/tekton
     repoURL: https://github.com/froberge/simple-quarkus-service-deploy.git
-
     targetRevision: main
   destination:
     namespace: simple-quarkus-pipeline
@@ -16,3 +15,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
