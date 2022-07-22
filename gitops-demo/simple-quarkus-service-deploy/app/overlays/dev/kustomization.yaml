@@ -12,3 +12,6 @@ patchesJson6902:
     version: v1
 resources:
 - ../../base/
+images:
+- name: image-registry.openshift-image-registry.svc:5000/simple-quarkus-pipeline/simple-quarkus-service
+  newTag: dabfaa
