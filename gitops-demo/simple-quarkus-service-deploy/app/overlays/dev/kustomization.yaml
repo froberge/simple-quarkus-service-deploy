@@ -11,4 +11,3 @@ patchesJson6902:
     group: apps
     kind: Deployment
     name: simple-quarkus-service
-    version: v1
