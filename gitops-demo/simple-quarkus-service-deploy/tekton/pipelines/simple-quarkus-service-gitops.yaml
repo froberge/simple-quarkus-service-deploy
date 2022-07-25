@@ -151,6 +151,21 @@ spec:
         workspace: source
       - name: input
         workspace: scratch
+    - name: pr-to-prod
+      params:
+      - name: title
+        value: Updating image to $(tasks.create-image-tag.results.tagref)
+      - name: body
+        value: Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)
+      - name: github-secret
+        value: github
+      taskRef:
+        name: github-create-pr
+      runAfter:
+        - commit-to-dev
+      workspaces:
+      - name: source
+        workspace: source
   workspaces:
     - name: source
     - name: m2-repo
