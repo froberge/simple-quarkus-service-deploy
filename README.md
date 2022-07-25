@@ -120,22 +120,67 @@ __NOTE__
         * __simple-quarkus-pipeline__ - The namespaces where the pipeline resources will be install.
         * __simple-quarkus-dev__ - The `DEV` environment for the demo.
         * __simple-quarkus-prod__ - The `PROD` environment for the demo.
-1.  Create the GitHub Webhook
-    * Retrive the trigger url.
-        
-        ```
-        echo "$(oc  get route el-github-webhook -n simple-quarkus-pipeline  --template='http://{{.spec.host}}')"
-        ```
 
-    * Open [GitHub](https://github.com/)  in the right repository, go to setting -> Webhook -> Add Webhook
+#### SETUP GitHub
+
+We need to set up 2 different elements in GitHub
+    1. A personel Token on you profile
+    2. A Webhook on the code repository
+
+
+##### Creation of a Personal token creation
+
+From your [GitHub](github.com) account.
+
+1. Under profile Select `setting`.
+    ![GitHub setting](docs/images/github-setting.png)
+
+2. Select `Developer settings`
+
+    ![GitHub dev](docs/images/github-devsetting.png)
+
+3. Select `Personal access tokens`
+
+    ![GitHub personal token](docs/images/github-personal-token.png)
+
+4. Click `Generate new token` and enter the information.
+
+    ![GitHub personal token 2](docs/images/github-access-token.png)
+
+    * `Note`: A name for token
+    * `Expiration`:When the token should expire according to you security policy.
+    *  `Select scopes`: _Repo_ need to be selected at a minumun
+    * Click `Generate token`
+
+    > :warning: Copy the generated token in a secure place, since once the window is close, you won't be able to retrieve it. 
+
+5. Generate the require secret for OpenShift.
+    * You need to edit the file `../gitops-demo/manifest/github-secret.yaml`
+    * Replace the information with your information
+        * `username:` [Add your username]
+        * `password:` [ADD GITHUB TOKEN HERE]
+    * Apply the file to OpenShift
+        ```
+        oc apply -f gitops-demo/manifest/github-secret.yaml
+        ```
+---
+##### Create the GitHub Webhook
+1. Retrive the trigger url.     
+    ```
+    echo "$(oc  get route el-github-webhook -n simple-quarkus-pipeline  --template='http://{{.spec.host}}')"
+    ```
+
+2. Open [GitHub](https://github.com/)  in the the code repository, go to setting -> Webhook -> Add Webhook
 
     ![Webhook](/docs/images/github-webhook.png)
 
-    You can now push a change to the repository, it should trigger the pipeline. 
+You can now push a change to the repository, it should trigger the pipeline. 
 
+---
 
-#### Make different modification to the application to test the different pipeline
+#### Make different modification to the application to test the pipeline.
 
-* pipeline 1 - Build the applicaition.
-* pipeline 2 - Release the application to production.
+* Modify the source code will trigger the pipeline
+* Modify the manifest it will trigger the ArgoCD sync
+
 
