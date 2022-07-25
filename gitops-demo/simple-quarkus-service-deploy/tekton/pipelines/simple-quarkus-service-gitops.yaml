@@ -160,7 +160,7 @@ spec:
         - name: overlaypath
           value: $(params.PROD_OVERLAY_DIR)
       runAfter:
-        - commit-to-dev
+        - patch-dev
       workspaces:
         - name: source
           workspace: source
