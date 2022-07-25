@@ -160,7 +160,7 @@ spec:
         - name: overlaypath
           value: $(params.PROD_OVERLAY_DIR)
       runAfter:
-        - patch-dev
+        - commit-to-dev
       workspaces:
         - name: source
           workspace: source
@@ -199,7 +199,7 @@ spec:
       taskRef:
         name: github-create-pr
       runAfter:
-        - commit-to-dev
+        - branch-to-prod
       workspaces:
       - name: source
         workspace: source
