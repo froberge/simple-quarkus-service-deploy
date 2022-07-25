@@ -183,7 +183,7 @@ spec:
         - patch-prod
       workspaces:
       - name: source
-        workspace: welcome-app-ws1
+        workspace: source
       - name: input
         workspace: scratch
     - name: pr-to-prod
