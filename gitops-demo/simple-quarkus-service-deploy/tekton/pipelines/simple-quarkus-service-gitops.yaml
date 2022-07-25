@@ -151,12 +151,49 @@ spec:
         workspace: source
       - name: input
         workspace: scratch
+    - name: patch-prod
+      taskRef:
+        name: kustomize
+      params:
+        - name: imagestream
+          value: $(tasks.create-image-tag.results.tag)
+        - name: overlaypath
+          value: $(params.PROD_OVERLAY_DIR)
+      runAfter:
+        - commit-to-dev
+      workspaces:
+        - name: source
+          workspace: source
+    - name: branch-to-prod
+      params:
+      - name: GIT_USER_NAME
+        value: simple-quarkus-pipeline-bot
+      - name: GIT_USER_EMAIL
+        value: simple-quarkus-pipeline-bot@demo.com
+      - name: GIT_SCRIPT
+        value: |
+          git checkout -b $(tasks.create-image-tag.results.tagref)
+          git add -A .
+          git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)"
+          git push origin HEAD:$(tasks.create-image-tag.results.tagref)
+      taskRef:
+        name: git-cli
+        kind: ClusterTask
+      runAfter:
+        - patch-prod
+      workspaces:
+      - name: source
+        workspace: welcome-app-ws1
+      - name: input
+        workspace: scratch
     - name: pr-to-prod
       params:
       - name: title
         value: Updating image to $(tasks.create-image-tag.results.tagref)
       - name: body
         value: Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)
+      - name: head
+        value: $(tasks.create-image-tag.results.tagref)
       - name: github-secret
         value: github
       taskRef:

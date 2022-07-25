@@ -11,6 +11,9 @@ spec:
     type: string
     default: The body description of the pull request. ex. The following PR includes these changes...
     description: The body of the PR request
+  - name: head
+    type: string
+    description: The name of the branch where your changes are implemented. ex. new-feature-branch
   - name: github-secret
     type: string
     default: github
@@ -21,7 +24,7 @@ spec:
       script: |
         #!/usr/bin/env bash
         # git create PR
-        gh pr create -t "$(params.title)" -b "$(params.body)"
+        gh pr create -h "$(params.head)" -t "$(params.title)" -b "$(params.body)"
       workingDir: $(workspaces.source.path)
       env:
         - name: GITHUB_TOKEN
