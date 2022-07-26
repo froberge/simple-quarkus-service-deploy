@@ -24,7 +24,7 @@ spec:
       script: |
         #!/usr/bin/env bash
         # git create PR
-        gh pr create -h "$(params.head)" -t "$(params.title)" -b "$(params.body)"
+        gh pr create -t "$(params.title)" -b "$(params.body)"
       workingDir: $(workspaces.source.path)
       env:
         - name: GITHUB_TOKEN
