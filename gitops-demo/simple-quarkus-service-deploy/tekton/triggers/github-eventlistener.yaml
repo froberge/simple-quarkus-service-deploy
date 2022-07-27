@@ -9,4 +9,4 @@ spec:
       bindings:
         - ref: github-pr-trigger-binding
       template:
-        ref: simple-quarkus-service-trigger-template
+        ref: pipeline-trigger-template
