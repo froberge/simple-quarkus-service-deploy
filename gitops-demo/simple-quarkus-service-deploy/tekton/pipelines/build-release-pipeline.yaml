@@ -117,7 +117,7 @@ spec:
       workspaces:
       - name: output
         workspace: source
-    - name: patch-deployment-DEV
+    - name: patch-deployment-dev
       taskRef:
         name: kustomize
       params:
@@ -130,7 +130,7 @@ spec:
       workspaces:
         - name: source
           workspace: source
-    - name: commit-path-to-DEV
+    - name: commit-path-to-dev
       params:
       - name: GIT_USER_NAME
         value: simple-quarkus-pipeline-bot
@@ -145,13 +145,13 @@ spec:
         name: git-cli
         kind: ClusterTask
       runAfter:
-        - patch-deployment-DEV
+        - patch-deployment-dev
       workspaces:
       - name: source
         workspace: source
       - name: input
         workspace: scratch
-    - name: patch-deployment-PROD
+    - name: patch-deployment-prod
       taskRef:
         name: kustomize
       params:
@@ -160,11 +160,11 @@ spec:
         - name: overlaypath
           value: $(params.PROD_OVERLAY_DIR)
       runAfter:
-        - commit-path-to-DEV
+        - commit-path-to-dev
       workspaces:
         - name: source
           workspace: source
-    - name: create-branch-PROD
+    - name: create-branch-prod
       params:
       - name: GIT_USER_NAME
         value: simple-quarkus-pipeline-bot
@@ -180,13 +180,13 @@ spec:
         name: git-cli
         kind: ClusterTask
       runAfter:
-        - patch-deployment-PROD
+        - patch-deployment-prod
       workspaces:
       - name: source
         workspace: source
       - name: input
         workspace: scratch
-    - name: commit-PR-to-PROD
+    - name: commit-pr-to-prod
       params:
       - name: title
         value: Updating image to $(tasks.create-image-tag.results.tagref)
@@ -199,7 +199,7 @@ spec:
       taskRef:
         name: github-create-pr
       runAfter:
-        - create-branch-PROD
+        - create-branch-prod
       workspaces:
       - name: source
         workspace: source
