@@ -2,7 +2,7 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: simple-quarkus-service-trigger-template
+  name: pipeline-trigger-template
 spec:
   params:
     - name: gitrevision
@@ -14,12 +14,12 @@ spec:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: simple-quarkus-service-
+        generateName: build-and-release-
         labels:
-          tekton.dev/pipeline: simple-quarkus-service
+          tekton.dev/pipeline: build-and-release
       spec:
         pipelineRef:
-          name: simple-quarkus-service-gitops
+          name: build-and-release
         serviceAccountName: pipeline
         params:
           - name: IMAGE_NAME
