@@ -23,6 +23,32 @@ __NOTE__
         * __simple-quarkus-dev__ - The `DEV` environment for the demo.
         * __simple-quarkus-prod__ - The `PROD` environment for the demo.
 
+### The Automation Flow.  
+
+The automation flow uses a mix of Tekton and ArgoCD.
+
+Tekton Build the application and creates the PR. ArgoCD monitor the changes in Git. The Pipeline is trigger woth a WebHook from GitHub.
+
+```mermaid
+flowchart LR;
+    A(Clone source code) --> B(Run Unit Test);
+    A --> C(Create Image tag);
+    B --> D(Buil Application);
+    C --> D;
+    D --> E(Clone Deployment \n Repository DEV);
+    E --> F(Patch DEV Deployment \n with new image tag);
+    F --> G(Commit change to \n DEV Repository);
+    G --> H(Patch PROD Deployment \n with new image tag);
+    H --> I(Create Branch in Git);
+    I --> J(Commit PR \n for PROD changes);
+
+
+
+```
+
+
+
+
 ### SetUp GitHub
 
 We need to set up 2 different elements in GitHub
