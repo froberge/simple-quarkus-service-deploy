@@ -41,9 +41,6 @@ flowchart LR;
     G --> H(Patch PROD Deployment \n with new image tag);
     H --> I(Create Branch in Git);
     I --> J(Commit PR \n for PROD changes);
-
-
-
 ```
 
 
