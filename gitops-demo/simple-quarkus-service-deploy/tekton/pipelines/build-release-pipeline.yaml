@@ -133,9 +133,15 @@ spec:
     - name: commit-path-to-dev
       params:
       - name: GIT_USER_NAME
-        value: simple-quarkus-pipeline-bot
+        valueFrom:
+          secretKeyRef:
+            name: $(params.github-secret)
+            key: username
       - name: GIT_USER_EMAIL
-        value: simple-quarkus-pipeline-bot@demo.com
+        valueFrom:
+          secretKeyRef:
+            name: $(params.github-secret)
+            key: email
       - name: GIT_SCRIPT
         value: |
           git config --global --add safe.directory /workspace/source
@@ -168,9 +174,15 @@ spec:
     - name: create-branch-prod
       params:
       - name: GIT_USER_NAME
-        value: simple-quarkus-pipeline-bot
+        valueFrom:
+          secretKeyRef:
+            name: $(params.github-secret)
+            key: username
       - name: GIT_USER_EMAIL
-        value: simple-quarkus-pipeline-bot@demo.com
+        valueFrom:
+          secretKeyRef:
+            name: $(params.github-secret)
+            key: email
       - name: GIT_SCRIPT
         value: |
           git config --global --add safe.directory /workspace/source
