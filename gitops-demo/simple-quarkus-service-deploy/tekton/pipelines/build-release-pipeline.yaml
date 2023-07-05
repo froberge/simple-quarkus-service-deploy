@@ -139,6 +139,8 @@ spec:
       - name: GIT_SCRIPT
         value: |
           git config --global --add safe.directory /workspace/source
+          git config --global user.name $(params.GIT_USER_NAME)
+          git config --global user.email $(params.GIT_USER_EMAIL)
           git add -A .
           git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.DEV_OVERLAY_DIR)"
           git push origin HEAD:main
@@ -174,6 +176,8 @@ spec:
       - name: GIT_SCRIPT
         value: |
           git config --global --add safe.directory /workspace/source
+          git config --global user.name $(params.GIT_USER_NAME)
+          git config --global user.email $(params.GIT_USER_EMAIL)
           git checkout -b $(tasks.create-image-tag.results.tagref)
           git add -A .
           git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)"
