@@ -7,7 +7,7 @@ We assume that you are in the folder that you have clone/fork the code. For inst
 `.../pipeline-demo/`
 1. Using `Kustomize` create the different resources needed to run the demo
     ```
-    oc apply -k pipeline-demo
+    oc apply -k .
     ```
     Result:
     ```
