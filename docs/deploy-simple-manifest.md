@@ -3,11 +3,11 @@
 We assume that you are in the folder that you have clone/fork the code.
 
 1. Login to you cluster using the CLI
-2. Create a new project.
+1. Create a new project.
     ```
     oc new-project manifest-demo
     ```
-3. Apply the 3 yaml files
+1. Apply the 3 yaml files
     ```
     oc apply -f manifest-demo/deployment.yaml
     ```
@@ -18,11 +18,16 @@ We assume that you are in the folder that you have clone/fork the code.
     oc apply -f manifest-demo/route.yaml
     ```
 
-4. Retrieve the URL
+1. View the URL
     ```
-    echo "URL: $(oc  get route simple-quarkus-service --template='http://{{.spec.host}}')"
+    echo "$(oc  get route simple-quarkus-service --template='http://{{.spec.host}}')"
     ```
-5. Take the url you have just retrieve with you favorite browser.
+
+1. Retrieve the URL in a variable
+    ```
+    URL=$(oc  get route simple-quarkus-service --template='http://{{.spec.host}}')
+    ```    
+1. Take the url you have just retrieve with you favorite browser.
 
 :tada: CONGRATULATIONS
 

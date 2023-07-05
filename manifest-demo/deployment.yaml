@@ -22,4 +22,12 @@ spec:
       - name: simple-quarkus-service
         image: quay.io/froberge/simple-quarkus-service:v1
         resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
 ---
