@@ -133,15 +133,9 @@ spec:
     - name: commit-path-to-dev
       params:
       - name: GIT_USER_NAME
-        valueFrom:
-          secretKeyRef:
-            name: $(params.github-secret)
-            key: username
+        value: froberge
       - name: GIT_USER_EMAIL
-        valueFrom:
-          secretKeyRef:
-            name: $(params.github-secret)
-            key: email
+        value: roberge.felix@gmail.com
       - name: GIT_SCRIPT
         value: |
           git config --global --add safe.directory /workspace/source
@@ -174,15 +168,9 @@ spec:
     - name: create-branch-prod
       params:
       - name: GIT_USER_NAME
-        valueFrom:
-          secretKeyRef:
-            name: $(params.github-secret)
-            key: username
+        value: froberge
       - name: GIT_USER_EMAIL
-        valueFrom:
-          secretKeyRef:
-            name: $(params.github-secret)
-            key: email
+        value: roberge.felix@gmail.com
       - name: GIT_SCRIPT
         value: |
           git config --global --add safe.directory /workspace/source
