@@ -1,9 +1,16 @@
 # Deploy Using OpenShift GitOps
 
-We assume that you are in the folder that you have clone/fork the code. For instructions on how to install OpenShift Gitops you can refer to my [OpenShift GitOps Demo](https://github.com/froberge/ocp-gitops-demo) in this [section](https://github.com/froberge/ocp-gitops-demo/blob/main/docs/install-gitops-operator.md)
+## Requirement
+* Access to an OpenShift Cluster
+
+* `Have the OpenShift Pipeline Operator install`. For instructions on how to install OpenShift Pipiline you can refer to my [OpenShift Pipeline Demo](https://github.com/froberge/ocp-pipeline-demo) in this [section](https://github.com/froberge/ocp-pipeline-demo/blob/main/docs/install-pipeline-operator.md)
+
+* `Have the OpenShift GitOps Operator install`. For instructions on how to install OpenShift Gitops you can refer to my [OpenShift GitOps Demo](https://github.com/froberge/ocp-gitops-demo) in this [section](https://github.com/froberge/ocp-gitops-demo/blob/main/docs/install-gitops-operator.md)
 
 
-In this section we will be demontrating how to use `OpenShift` gitops to manage our application and to deploy the application. To to this we need to deploy an other `ArgoCD instance` that will be use for developers to manage the applications
+* `Have a clone/fork of this repository`.
+
+In this demo we will be demontrating how to use `OpenShift` Gitops to manage our application and to deploy an application. To do this we need to deploy an other `ArgoCD instance` that will be use for developers to manage the applications
 
 __NOTE__
 *   The default `cluster` instance of Argo CD is meant for cluster admin tasks like creating namespace managing role bindings not for day to day application management.
@@ -12,7 +19,7 @@ __NOTE__
 
 1. Login to you cluster using the CLI
 
-1. Use kKustomize` create the different resources needed to run the demo 
+1. Use `kustomize` to create the different resources needed to run the demo 
     ```
     oc apply -k gitops-demo/setup/overlays/demo
     ```
@@ -81,9 +88,9 @@ From your [GitHub](github.com) account.
 
 5. Generate the require secret for OpenShift to commit.
     * You need to edit the file `../gitops-demo/manifest/github-secret.yaml`
-    * Replace the information with your information. 
-        * `username:` [Add your username]
-        * `password:` [GITHUB TOKEN]
+    * Replace following token with the appropriate value
+        * `[CLEAR_TEXT_USERNAME]`
+        * `[CLEAR_TEXT_TOKEN]`
     * Apply the file to OpenShift
         ```
         oc apply -f gitops-demo/manifest/github-secret.yaml
@@ -100,8 +107,6 @@ From your [GitHub](github.com) account.
     ```
     oc apply -f gitops-demo/manifest/github.yaml
     ```
-
-    
 
 ---
 ##### Create the GitHub Webhook
