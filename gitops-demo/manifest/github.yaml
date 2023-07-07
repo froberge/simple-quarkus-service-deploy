@@ -5,6 +5,6 @@ metadata:
   namespace: simple-quarkus-pipeline
 type: Opaque
 data:
-  token: [64_encoded_token]
-  username: [64_encoded_username]
-  email: [64_encoded_email]
+  token: Z2hwX1k2MkV1Y3BCWjFraDVvMENZb1JnOEdESFlueXRNRTM3dmJjeg==
+  username: ZnJvYmVyZ2U=
+  email: cm9iZXJnZS5mZWxpeEBnbWFpbC5jb20=
