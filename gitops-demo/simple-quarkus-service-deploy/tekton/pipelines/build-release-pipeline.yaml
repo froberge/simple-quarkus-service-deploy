@@ -152,7 +152,7 @@ spec:
         workspace: source
       - name: input
         workspace: scratch
-      - name: git-credentials
+      - name: basic-auth
         workspace: git-credentials
     - name: patch-deployment-prod
       taskRef:
