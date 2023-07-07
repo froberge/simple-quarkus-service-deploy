@@ -190,6 +190,8 @@ spec:
         workspace: source
       - name: input
         workspace: scratch
+      - name: basic-auth
+        workspace: git-credentials
     - name: commit-pr-to-prod
       params:
       - name: title
