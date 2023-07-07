@@ -51,4 +51,7 @@ spec:
               claimName: maven-repo-pvc
           - name: scratch
             emptyDir: {}
+          - name: git-credentials
+            secret:
+              secretName: github-authentication
 

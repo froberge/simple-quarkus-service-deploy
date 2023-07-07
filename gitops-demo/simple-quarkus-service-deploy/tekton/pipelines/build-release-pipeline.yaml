@@ -152,6 +152,8 @@ spec:
         workspace: source
       - name: input
         workspace: scratch
+      - name: git-credentials
+        workspace: git-credentials
     - name: patch-deployment-prod
       taskRef:
         name: kustomize
@@ -210,4 +212,5 @@ spec:
     - name: m2-repo
     - name: scratch
       description: This is a scratch disk
-
+    - name: git-credentials
+      descriptions: My git credentials
