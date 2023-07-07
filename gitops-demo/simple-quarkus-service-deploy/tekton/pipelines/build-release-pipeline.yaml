@@ -213,4 +213,4 @@ spec:
     - name: scratch
       description: This is a scratch disk
     - name: git-credentials
-      descriptions: My git credentials
+      description: My git credentials
