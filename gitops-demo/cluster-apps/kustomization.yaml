@@ -3,7 +3,7 @@ kind: Kustomization
 
 bases:
   - ../argocd-components/argocd-dev-instance
-#  - tekton
+  - tekton
   
 
 resources:
