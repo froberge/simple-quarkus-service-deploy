@@ -167,7 +167,7 @@ spec:
       workspaces:
         - name: source
           workspace: source
-    - name: create-branch-prod
+    - name: create-pullrequest-prod
       params:
       - name: GIT_USER_NAME
         value: simple-quarkus-pipeline-bot
