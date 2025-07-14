@@ -130,7 +130,7 @@ spec:
       workspaces:
         - name: source
           workspace: source
-    - name: commit-path-to-dev
+    - name: commit-patch-to-dev
       params:
       - name: GIT_USER_NAME
         value: simple-quarkus-pipeline-bot
@@ -163,7 +163,7 @@ spec:
         - name: overlaypath
           value: $(params.PROD_OVERLAY_DIR)
       runAfter:
-        - commit-path-to-dev
+        - commit-patch-to-dev
       workspaces:
         - name: source
           workspace: source
@@ -192,23 +192,6 @@ spec:
         workspace: scratch
       - name: basic-auth
         workspace: git-credentials
-    - name: commit-pr-to-prod
-      params:
-      - name: title
-        value: Updating image to $(tasks.create-image-tag.results.tagref)
-      - name: body
-        value: Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)
-      - name: head
-        value: $(tasks.create-image-tag.results.tagref)
-      - name: github-secret
-        value: github
-      taskRef:
-        name: github-create-pr
-      runAfter:
-        - create-branch-prod
-      workspaces:
-      - name: source
-        workspace: source
   workspaces:
     - name: source
     - name: m2-repo
