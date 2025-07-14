@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: simple-quarkus-service
-        image: quay.io/froberge/simple-quarkus-service:v1
+        image: quay.io/froberge/simple-quarkus-service:v3
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
