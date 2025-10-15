@@ -48,10 +48,8 @@ spec:
         - name: deleteExisting
           value: 'true'
       taskRef:
+        kind: ClusterTask
         name: git-clone
-        resolver: cluster
-        # kind: ClusterTask
-        # name: git-clone
       workspaces:
         - name: output
           workspace: source
