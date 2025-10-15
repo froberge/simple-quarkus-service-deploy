@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: simple-quarkus-pipeline
 
 resources:
+  - r
   - workspaces/maven-repo-pvc.yaml
   - workspaces/source-pvc.yaml
   - pipelines/build-release-pipeline.yaml
@@ -12,4 +13,5 @@ resources:
   - triggers/github-pr-trigger-binding.yaml
   - triggers/listener-routes.yaml
   - triggers/pipeline-trigger-template.yaml
+
 
