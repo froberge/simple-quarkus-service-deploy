@@ -63,7 +63,7 @@ spec:
           value: $(params.IMAGE_NAME)
       taskRef:
         name: set-image-tag
-        apiVersion: 
+        apiVersion: tekton.dev/v1beta1
       runAfter:
         - clone-code-repo
       workspaces:
