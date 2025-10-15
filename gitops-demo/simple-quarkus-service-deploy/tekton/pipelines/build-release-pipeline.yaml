@@ -63,6 +63,7 @@ spec:
           value: $(params.IMAGE_NAME)
       taskRef:
         name: set-image-tag
+        apiVersion: 
       runAfter:
         - clone-code-repo
       workspaces:
@@ -120,6 +121,7 @@ spec:
     - name: patch-deployment-dev
       taskRef:
         name: kustomize
+        apiVersion: tekton.dev/v1beta1
       params:
         - name: imagestream
           value: $(tasks.create-image-tag.results.tag)
