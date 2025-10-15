@@ -50,7 +50,7 @@ spec:
       taskRef:
         apiVersion: tekton.dev/v1
         kind: Task
-        name: git-clone
+        name: git-clone-1-20-0
         namespace: openshift-pipelines
       params:
         - name: url
