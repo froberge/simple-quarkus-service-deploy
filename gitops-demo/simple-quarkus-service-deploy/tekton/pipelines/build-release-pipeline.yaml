@@ -68,9 +68,14 @@ spec:
           workspace: source
     - name: create-image-tag
       taskRef:
-        apiVersion: tekton.dev/v1  
-        kind: task    
-        name: set-image-tag
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: set-image-tag
+          - name: namespace
+            value: openshift-pipelines
       params:
         - name: commit
           value: $(tasks.clone-code-repo.results.commit)
@@ -85,10 +90,14 @@ spec:
         - clone-code-repo
     - name: test-app
       taskRef:
-        apiVersion: tekton.dev/v1
-        kind: Task
-        name: maven
-        namespace: openshift-pipelines
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: maven
+          - name: namespace
+            value: openshift-pipelines
       params:
         - name: GOALS
           value:
@@ -103,10 +112,14 @@ spec:
         - clone-code-repo
     - name: build-app
       taskRef:
-        apiVersion: tekton.dev/v1
-        kind: Task
-        name: s2i-java
-        namespace: openshift-pipelines
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: s2i-java
+          - name: namespace
+            value: openshift-pipelines
       params:
         - name: IMAGE
           value: $(tasks.create-image-tag.results.tag)
@@ -124,14 +137,18 @@ spec:
         - create-image-tag
     - name: clone-deployment-repo
       taskRef:
-        apiVersion: tekton.dev/v1      
-        kind: task
-        name: git-clone
-        namespace: openshift-pipelines
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
       params:
-      - name: url
+      - name: URL
         value: $(params.DEPLOY_GIT_REPO)
-      - name: revision
+      - name: REVISION
         value: $(params.DEPLOY_GIT_REVISION)
       workspaces:
       - name: output
@@ -155,10 +172,14 @@ spec:
         - clone-deployment-repo
     - name: commit-patch-to-dev
       taskRef:
-        apiVersion: tekton.dev/v1      
-        kind: task
-        name: git-cli
-        namespace: openshift-pipelines
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-cli
+          - name: namespace
+            value: openshift-pipelines
       params:
       - name: GIT_USER_NAME
         value: simple-quarkus-pipeline-bot
@@ -196,10 +217,15 @@ spec:
         - commit-patch-to-dev
     - name: create-pullrequest-prod
       taskRef:
-        apiVersion: tekton.dev/v1
-        kind: task
-        name: git-cli
-        namespace: openshift-pipelines
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-cli
+          - name: namespace
+            value: openshift-pipelines
       params:
       - name: GIT_USER_NAME
         value: simple-quarkus-pipeline-bot
