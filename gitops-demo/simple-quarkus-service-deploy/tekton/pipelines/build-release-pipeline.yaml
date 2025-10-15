@@ -48,10 +48,14 @@ spec:
   tasks:
     - name: clone-code-repo
       taskRef:
-        apiVersion: tekton.dev/v1
-        kind: Task
-        name: git-clone-1-20-0
-        namespace: openshift-pipelines
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
       params:
         - name: url
           value: $(params.GIT_REPO)
