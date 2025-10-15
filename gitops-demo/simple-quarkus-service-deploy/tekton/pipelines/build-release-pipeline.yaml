@@ -48,6 +48,7 @@ spec:
   tasks:
     - name: clone-code-repo
       taskRef:
+        apiVersion: tekton.dev/v1beta1
         kind: Task
         name: git-clone
         namespace: openshift-pipelines
@@ -63,8 +64,9 @@ spec:
           workspace: source
     - name: create-image-tag
       taskRef:
+        apiVersion: tekton.dev/v1beta1  
+        kind: task    
         name: set-image-tag
-        apiVersion: tekton.dev/v1beta1
       params:
         - name: commit
           value: $(tasks.clone-code-repo.results.commit)
@@ -79,6 +81,7 @@ spec:
         - clone-code-repo
     - name: test-app
       taskRef:
+        apiVersion: tekton.dev/v1beta1
         kind: Task
         name: maven
         namespace: openshift-pipelines
@@ -96,6 +99,7 @@ spec:
         - clone-code-repo
     - name: build-app
       taskRef:
+        apiVersion: tekton.dev/v1beta1
         kind: Task
         name: s2i-java
         namespace: openshift-pipelines
@@ -116,6 +120,7 @@ spec:
         - create-image-tag
     - name: clone-deployment-repo
       taskRef:
+        apiVersion: tekton.dev/v1beta1      
         kind: task
         name: git-clone
         namespace: openshift-pipelines
@@ -131,8 +136,9 @@ spec:
         - build-app
     - name: patch-deployment-dev
       taskRef:
-        name: kustomize
         apiVersion: tekton.dev/v1beta1
+        kind: task
+        name: kustomize
       params:
         - name: imagestream
           value: $(tasks.create-image-tag.results.tag)
@@ -145,6 +151,7 @@ spec:
         - clone-deployment-repo
     - name: commit-patch-to-dev
       taskRef:
+        apiVersion: tekton.dev/v1beta1      
         kind: task
         name: git-cli
         namespace: openshift-pipelines
@@ -170,8 +177,9 @@ spec:
         - patch-deployment-dev
     - name: patch-deployment-prod
       taskRef:
-        name: kustomize
         apiVersion: tekton.dev/v1beta1
+        kind: task      
+        name: kustomize
       params:
         - name: imagestream
           value: $(tasks.create-image-tag.results.tag)
@@ -184,6 +192,7 @@ spec:
         - commit-patch-to-dev
     - name: create-pullrequest-prod
       taskRef:
+        apiVersion: tekton.dev/v1beta1
         kind: task
         name: git-cli
         namespace: openshift-pipelines
