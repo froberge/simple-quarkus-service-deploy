@@ -217,7 +217,6 @@ spec:
         - commit-patch-to-dev
     - name: create-pullrequest-prod
       taskRef:
-      taskRef:
         resolver: cluster
         params:
           - name: kind
