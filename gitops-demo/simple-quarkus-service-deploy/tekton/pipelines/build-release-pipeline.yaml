@@ -68,14 +68,9 @@ spec:
           workspace: source
     - name: create-image-tag
       taskRef:
-        resolver: cluster
-        params:
-          - name: kind
-            value: task
-          - name: name
-            value: set-image-tag
-          - name: namespace
-            value: openshift-pipelines
+        apiVersion: tekton.dev/v1
+        kind: task
+        name: set-image-tagimage
       params:
         - name: commit
           value: $(tasks.clone-code-repo.results.commit)
