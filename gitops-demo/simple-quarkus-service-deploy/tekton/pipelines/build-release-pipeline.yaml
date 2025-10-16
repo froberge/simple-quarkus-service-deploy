@@ -151,26 +151,26 @@ spec:
       runAfter:
         - create-image-tag
       #   - build-app
-    # - name: patch-deployment-dev
-    #   taskRef:
-    #     resolver: cluster
-    #     params:
-    #       - name: kind
-    #         value: task
-    #       - name: name
-    #         value: kustomize
-    #       - name: namespace
-    #         value: simple-quarkus-pipeline
-    #   params:
-    #     - name: imagestream
-    #       value: $(tasks.create-image-tag.results.tag)
-    #     - name: overlaypath
-    #       value: $(params.DEV_OVERLAY_DIR)
-    #   workspaces:
-    #     - name: source
-    #       workspace: source
-    #   runAfter:
-    #     - clone-deployment-repo
+    - name: patch-deployment-dev
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: kustomize
+          - name: namespace
+            value: simple-quarkus-pipeline
+      params:
+        - name: imagestream
+          value: $(tasks.create-image-tag.results.tag)
+        - name: overlaypath
+          value: $(params.DEV_OVERLAY_DIR)
+      workspaces:
+        - name: source
+          workspace: source
+      runAfter:
+        - clone-deployment-repo
     - name: commit-patch-to-dev
       taskRef:
         resolver: cluster
@@ -190,9 +190,6 @@ spec:
           value: simple-quarkus-pipeline-bot@demo.com
         - name: GIT_SCRIPT
           value: |
-            echo "Current workspace contents:"
-            ls -alR /home/git/ | head -40
-
             cd /workspace/source
             git config --global --add safe.directory /workspace/source
             
