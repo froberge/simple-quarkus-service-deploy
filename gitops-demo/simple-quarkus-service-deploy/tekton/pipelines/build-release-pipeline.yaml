@@ -45,46 +45,46 @@ spec:
     - name: git-credentials
       description: My git credentials
   tasks:
-    # - name: clone-code-repo
-    #   taskRef:
-    #     resolver: cluster
-    #     params:
-    #       - name: kind
-    #         value: task
-    #       - name: name
-    #         value: git-clone
-    #       - name: namespace
-    #         value: openshift-pipelines
-    #   params:
-    #     - name: URL
-    #       value: $(params.GIT_REPO)
-    #     - name: REVISION
-    #       value: $(params.GIT_REVISION)
-    #   workspaces:
-    #     - name: output
-    #       workspace: source
-    # - name: create-image-tag
-    #   taskRef:
-    #     resolver: cluster
-    #     params:
-    #       - name: kind
-    #         value: task
-    #       - name: name
-    #         value: set-image-tag
-    #       - name: namespace
-    #         value: simple-quarkus-pipeline
-    #   params:
-    #     - name: commit
-    #       value: $(tasks.clone-code-repo.results.COMMIT)
-    #     - name: url
-    #       value: $(tasks.clone-code-repo.results.URL)
-    #     - name: imagestream
-    #       value: $(params.IMAGE_NAME)
-    #   workspaces:
-    #     - name: tagoutput
-    #       workspace: source
-    #   runAfter:
-    #     - clone-code-repo
+    - name: clone-code-repo
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+      params:
+        - name: URL
+          value: $(params.GIT_REPO)
+        - name: REVISION
+          value: $(params.GIT_REVISION)
+      workspaces:
+        - name: output
+          workspace: source
+    - name: create-image-tag
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: set-image-tag
+          - name: namespace
+            value: simple-quarkus-pipeline
+      params:
+        - name: commit
+          value: $(tasks.clone-code-repo.results.COMMIT)
+        - name: url
+          value: $(tasks.clone-code-repo.results.URL)
+        - name: imagestream
+          value: $(params.IMAGE_NAME)
+      workspaces:
+        - name: tagoutput
+          workspace: source
+      runAfter:
+        - clone-code-repo
     # - name: test-app
     #   taskRef:
     #     resolver: cluster
@@ -162,8 +162,7 @@ spec:
             value: simple-quarkus-pipeline
       params:
         - name: imagestream
-          value: "548e74"
-          # value: $(tasks.create-image-tag.results.tag)
+          value: $(tasks.create-image-tag.results.tag)
         - name: overlaypath
           value: $(params.DEV_OVERLAY_DIR)
       workspaces:
