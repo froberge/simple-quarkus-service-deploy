@@ -151,26 +151,26 @@ spec:
       runAfter:
         - create-image-tag
       #   - build-app
-    - name: patch-deployment-dev
-      taskRef:
-        resolver: cluster
-        params:
-          - name: kind
-            value: task
-          - name: name
-            value: kustomize
-          - name: namespace
-            value: simple-quarkus-pipeline
-      params:
-        - name: imagestream
-          value: $(tasks.create-image-tag.results.tag)
-        - name: overlaypath
-          value: $(params.DEV_OVERLAY_DIR)
-      workspaces:
-        - name: source
-          workspace: source
-      runAfter:
-        - clone-deployment-repo
+    # - name: patch-deployment-dev
+    #   taskRef:
+    #     resolver: cluster
+    #     params:
+    #       - name: kind
+    #         value: task
+    #       - name: name
+    #         value: kustomize
+    #       - name: namespace
+    #         value: simple-quarkus-pipeline
+    #   params:
+    #     - name: imagestream
+    #       value: $(tasks.create-image-tag.results.tag)
+    #     - name: overlaypath
+    #       value: $(params.DEV_OVERLAY_DIR)
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #   runAfter:
+    #     - clone-deployment-repo
     - name: commit-patch-to-dev
       taskRef:
         resolver: cluster
@@ -205,7 +205,8 @@ spec:
         - name: basic-auth
           workspace: git-credentials
       runAfter:
-        - patch-deployment-dev
+        - clone-deployment-repo
+        # - patch-deployment-dev
     # - name: patch-deployment-prod
     #   taskRef:
     #     resolver: cluster
