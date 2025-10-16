@@ -183,22 +183,22 @@ spec:
           - name: namespace
             value: openshift-pipelines
       params:
-      - name: GIT_USER_NAME
-        value: simple-quarkus-pipeline-bot
-      - name: GIT_USER_EMAIL
-        value: simple-quarkus-pipeline-bot@demo.com
-      - name: GIT_SCRIPT
-        value: |
-          git config --global --add safe.directory /workspace/source
-          cd /workspace/source
-          git add -A .
-          git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.DEV_OVERLAY_DIR)"
-          git push origin HEAD:main
+        - name: GIT_USER_NAME
+          value: simple-quarkus-pipeline-bot
+        - name: GIT_USER_EMAIL
+          value: simple-quarkus-pipeline-bot@demo.com
+        - name: GIT_SCRIPT
+          value: |
+            git config --global --add safe.directory /workspace/source
+            cd /workspace/source
+            git add -A .
+            git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.DEV_OVERLAY_DIR)"
+            git push origin HEAD:main
       workspaces:
-      - name: source
-        workspace: source
-      - name: basic-auth
-        workspace: git-credentials
+        - name: source
+          workspace: source
+        - name: basic-auth
+          workspace: git-credentials
       runAfter:
         - patch-deployment-dev
     - name: patch-deployment-prod
@@ -232,22 +232,22 @@ spec:
           - name: namespace
             value: openshift-pipelines
       params:
-      - name: GIT_USER_NAME
-        value: simple-quarkus-pipeline-bot
-      - name: GIT_USER_EMAIL
-        value: simple-quarkus-pipeline-bot@demo.com
-      - name: GIT_SCRIPT
-        value: |
-          git config --global --add safe.directory /workspace/source
-          cd /workspace/source
-          git checkout -b $(tasks.create-image-tag.results.tagref)
-          git add -A .
-          git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)"
-          git push origin HEAD:$(tasks.create-image-tag.results.tagref)
+        - name: GIT_USER_NAME
+          value: simple-quarkus-pipeline-bot
+        - name: GIT_USER_EMAIL
+          value: simple-quarkus-pipeline-bot@demo.com
+        - name: GIT_SCRIPT
+          value: |
+            git config --global --add safe.directory /workspace/source
+            cd /workspace/source
+            git checkout -b $(tasks.create-image-tag.results.tagref)
+            git add -A .
+            git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)"
+            git push origin HEAD:$(tasks.create-image-tag.results.tagref)
       workspaces:
-      - name: source
-        workspace: source
-      - name: basic-auth
-        workspace: git-credentials
+        - name: source
+          workspace: source
+        - name: basic-auth
+          workspace: git-credentials
       runAfter:
         - patch-deployment-prod
