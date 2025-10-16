@@ -73,9 +73,9 @@ spec:
         name: set-image-tagimage
       params:
         - name: commit
-          value: $(tasks.clone-code-repo.results.commit)
+          value: $(tasks.clone-code-repo.results.COMMIT)
         - name: url
-          value: $(tasks.clone-code-repo.results.url)
+          value: $(tasks.clone-code-repo.results.URL)
         - name: imagestream
           value: $(params.IMAGE_NAME)
       workspaces:
