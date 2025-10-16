@@ -189,6 +189,8 @@ spec:
           value: simple-quarkus-pipeline-bot@demo.com
         - name: GIT_SCRIPT
           value: |
+            echo "Current workspace contents:"
+            ls -alR /workspace/source | head -40
             git config --global --add safe.directory /workspace/source
             cd /workspace/source
             git add -A .
