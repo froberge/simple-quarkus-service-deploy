@@ -67,8 +67,11 @@ spec:
           workspace: source
     - name: create-image-tag
       taskRef:
-        # apiVersion: tekton.dev/v1
-        name: set-image-tag
+        params:
+          - name: name
+            value: set-image-tag
+          - name: namespace
+            value: simple-quarkus-pipelines
       params:
         - name: commit
           value: $(tasks.clone-code-repo.results.COMMIT)
