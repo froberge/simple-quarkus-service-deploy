@@ -45,91 +45,91 @@ spec:
     - name: git-credentials
       description: My git credentials
   tasks:
-    - name: clone-code-repo
-      taskRef:
-        resolver: cluster
-        params:
-          - name: kind
-            value: task
-          - name: name
-            value: git-clone
-          - name: namespace
-            value: openshift-pipelines
-      params:
-        - name: URL
-          value: $(params.GIT_REPO)
-        - name: REVISION
-          value: $(params.GIT_REVISION)
-      workspaces:
-        - name: output
-          workspace: source
-    - name: create-image-tag
-      taskRef:
-        resolver: cluster
-        params:
-          - name: kind
-            value: task
-          - name: name
-            value: set-image-tag
-          - name: namespace
-            value: simple-quarkus-pipeline
-      params:
-        - name: commit
-          value: $(tasks.clone-code-repo.results.COMMIT)
-        - name: url
-          value: $(tasks.clone-code-repo.results.URL)
-        - name: imagestream
-          value: $(params.IMAGE_NAME)
-      workspaces:
-        - name: tagoutput
-          workspace: source
-      runAfter:
-        - clone-code-repo
-    - name: test-app
-      taskRef:
-        resolver: cluster
-        params:
-          - name: kind
-            value: task
-          - name: name
-            value: maven
-          - name: namespace
-            value: openshift-pipelines
-      params:
-        - name: GOALS
-          value:
-            - 'clean'
-            - 'test'
-      workspaces:
-        - name: source
-          workspace: source
-      runAfter:
-        - clone-code-repo
-    - name: build-app
-      taskRef:
-        resolver: cluster
-        params:
-          - name: kind
-            value: task
-          - name: name
-            value: s2i-java
-          - name: namespace
-            value: openshift-pipelines
-      params:
-        - name: IMAGE
-          value: $(tasks.create-image-tag.results.tag)
-        - name: TLS_VERIFY
-          value: 'false'
-        - name: CONTEXT
-          value: $(workspaces.source.path)
-        - name: VERSION
-          value: $(params.VERSION)
-      workspaces:
-        - name: source
-          workspace: source
-      runAfter:
-        - test-app
-        - create-image-tag
+    # - name: clone-code-repo
+    #   taskRef:
+    #     resolver: cluster
+    #     params:
+    #       - name: kind
+    #         value: task
+    #       - name: name
+    #         value: git-clone
+    #       - name: namespace
+    #         value: openshift-pipelines
+    #   params:
+    #     - name: URL
+    #       value: $(params.GIT_REPO)
+    #     - name: REVISION
+    #       value: $(params.GIT_REVISION)
+    #   workspaces:
+    #     - name: output
+    #       workspace: source
+    # - name: create-image-tag
+    #   taskRef:
+    #     resolver: cluster
+    #     params:
+    #       - name: kind
+    #         value: task
+    #       - name: name
+    #         value: set-image-tag
+    #       - name: namespace
+    #         value: simple-quarkus-pipeline
+    #   params:
+    #     - name: commit
+    #       value: $(tasks.clone-code-repo.results.COMMIT)
+    #     - name: url
+    #       value: $(tasks.clone-code-repo.results.URL)
+    #     - name: imagestream
+    #       value: $(params.IMAGE_NAME)
+    #   workspaces:
+    #     - name: tagoutput
+    #       workspace: source
+    #   runAfter:
+    #     - clone-code-repo
+    # - name: test-app
+    #   taskRef:
+    #     resolver: cluster
+    #     params:
+    #       - name: kind
+    #         value: task
+    #       - name: name
+    #         value: maven
+    #       - name: namespace
+    #         value: openshift-pipelines
+    #   params:
+    #     - name: GOALS
+    #       value:
+    #         - 'clean'
+    #         - 'test'
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #   runAfter:
+    #     - clone-code-repo
+    # - name: build-app
+    #   taskRef:
+    #     resolver: cluster
+    #     params:
+    #       - name: kind
+    #         value: task
+    #       - name: name
+    #         value: s2i-java
+    #       - name: namespace
+    #         value: openshift-pipelines
+    #   params:
+    #     - name: IMAGE
+    #       value: $(tasks.create-image-tag.results.tag)
+    #     - name: TLS_VERIFY
+    #       value: 'false'
+    #     - name: CONTEXT
+    #       value: $(workspaces.source.path)
+    #     - name: VERSION
+    #       value: $(params.VERSION)
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #   runAfter:
+    #     - test-app
+    #     - create-image-tag
     - name: clone-deployment-repo
       taskRef:
         resolver: cluster
@@ -141,17 +141,15 @@ spec:
           - name: namespace
             value: openshift-pipelines
       params:
-      - name: URL
-        value: $(params.DEPLOY_GIT_REPO)
-      - name: REVISION
-        value: $(params.DEPLOY_GIT_REVISION)
-      - name: SUBDIRECTORY
-        value: ""
+        - name: URL
+          value: $(params.DEPLOY_GIT_REPO)
+        - name: REVISION
+          value: $(params.DEPLOY_GIT_REVISION)
       workspaces:
-      - name: output
-        workspace: source
-      runAfter:
-        - build-app
+        - name: output
+          workspace: source
+      # runAfter:
+      #   - build-app
     - name: patch-deployment-dev
       taskRef:
         resolver: cluster
@@ -164,7 +162,8 @@ spec:
             value: simple-quarkus-pipeline
       params:
         - name: imagestream
-          value: $(tasks.create-image-tag.results.tag)
+          value: "548e74"
+          # value: $(tasks.create-image-tag.results.tag)
         - name: overlaypath
           value: $(params.DEV_OVERLAY_DIR)
       workspaces:
@@ -197,7 +196,7 @@ spec:
             cd /workspace/source/${REPO_DIR}
 
             git add -A .
-            git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.DEV_OVERLAY_DIR)"
+            git commit -am "Run commit"
             git push origin HEAD:main
       workspaces:
         - name: source
@@ -208,54 +207,54 @@ spec:
           workspace: git-credentials
       runAfter:
         - patch-deployment-dev
-    - name: patch-deployment-prod
-      taskRef:
-        resolver: cluster
-        params:
-          - name: kind
-            value: task
-          - name: name
-            value: kustomize
-          - name: namespace
-            value: simple-quarkus-pipeline
-      params:
-        - name: imagestream
-          value: $(tasks.create-image-tag.results.tag)
-        - name: overlaypath
-          value: $(params.PROD_OVERLAY_DIR)
-      workspaces:
-        - name: source
-          workspace: source
-      runAfter:
-        - commit-patch-to-dev
-    - name: create-pullrequest-prod
-      taskRef:
-        resolver: cluster
-        params:
-          - name: kind
-            value: task
-          - name: name
-            value: git-cli
-          - name: namespace
-            value: openshift-pipelines
-      params:
-        - name: GIT_USER_NAME
-          value: simple-quarkus-pipeline-bot
-        - name: GIT_USER_EMAIL
-          value: simple-quarkus-pipeline-bot@demo.com
-        - name: GIT_SCRIPT
-          value: |
-            git config --global --add safe.directory /workspace/source
-            git checkout -b $(tasks.create-image-tag.results.tagref)
-            git add -A .
-            git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)"
-            git push origin HEAD:$(tasks.create-image-tag.results.tagref)
-      workspaces:
-        - name: source
-          workspace: source
-        - name: input
-          workspace: scratch
-        - name: basic-auth
-          workspace: git-credentials
-      runAfter:
-        - patch-deployment-prod
+    # - name: patch-deployment-prod
+    #   taskRef:
+    #     resolver: cluster
+    #     params:
+    #       - name: kind
+    #         value: task
+    #       - name: name
+    #         value: kustomize
+    #       - name: namespace
+    #         value: simple-quarkus-pipeline
+    #   params:
+    #     - name: imagestream
+    #       value: $(tasks.create-image-tag.results.tag)
+    #     - name: overlaypath
+    #       value: $(params.PROD_OVERLAY_DIR)
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #   runAfter:
+    #     - commit-patch-to-dev
+    # - name: create-pullrequest-prod
+    #   taskRef:
+    #     resolver: cluster
+    #     params:
+    #       - name: kind
+    #         value: task
+    #       - name: name
+    #         value: git-cli
+    #       - name: namespace
+    #         value: openshift-pipelines
+    #   params:
+    #     - name: GIT_USER_NAME
+    #       value: simple-quarkus-pipeline-bot
+    #     - name: GIT_USER_EMAIL
+    #       value: simple-quarkus-pipeline-bot@demo.com
+    #     - name: GIT_SCRIPT
+    #       value: |
+    #         git config --global --add safe.directory /workspace/source
+    #         git checkout -b $(tasks.create-image-tag.results.tagref)
+    #         git add -A .
+    #         git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)"
+    #         git push origin HEAD:$(tasks.create-image-tag.results.tagref)
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #     - name: input
+    #       workspace: scratch
+    #     - name: basic-auth
+    #       workspace: git-credentials
+    #   runAfter:
+    #     - patch-deployment-prod
