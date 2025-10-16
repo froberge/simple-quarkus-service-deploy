@@ -190,14 +190,13 @@ spec:
       - name: GIT_SCRIPT
         value: |
           git config --global --add safe.directory /workspace/source
+          cd /
           git add -A .
           git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.DEV_OVERLAY_DIR)"
           git push origin HEAD:main
       workspaces:
       - name: source
         workspace: source
-      - name: input
-        workspace: scratch
       - name: basic-auth
         workspace: git-credentials
       runAfter:
@@ -240,6 +239,7 @@ spec:
       - name: GIT_SCRIPT
         value: |
           git config --global --add safe.directory /workspace/source
+          cd /workspace/source
           git checkout -b $(tasks.create-image-tag.results.tagref)
           git add -A .
           git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.PROD_OVERLAY_DIR)"
@@ -247,8 +247,6 @@ spec:
       workspaces:
       - name: source
         workspace: source
-      - name: input
-        workspace: scratch
       - name: basic-auth
         workspace: git-credentials
       runAfter:
