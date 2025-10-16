@@ -189,7 +189,7 @@ spec:
         - name: GIT_SCRIPT
           value: |
             echo "Current workspace contents:"
-            ls -alR /workspace/source/ | head -50
+            ls -alR /home/git/ | head -50
 
             REPO_DIR="simple-quarkus-service-deploy"
             git config --global --add safe.directory /workspace/source/${REPO_DIR}
