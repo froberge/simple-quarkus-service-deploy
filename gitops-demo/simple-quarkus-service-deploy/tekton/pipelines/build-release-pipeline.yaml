@@ -74,7 +74,7 @@ spec:
           - name: name
             value: set-image-tag
           - name: namespace
-            value: openshift-pipsimple-quarkus-pipeline
+            value: simple-quarkus-pipeline
       params:
         - name: commit
           value: $(tasks.clone-code-repo.results.COMMIT)
