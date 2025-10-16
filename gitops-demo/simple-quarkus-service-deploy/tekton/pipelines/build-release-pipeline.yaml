@@ -67,7 +67,7 @@ spec:
           workspace: source
     - name: create-image-tag
       taskRef:
-        apiVersion: tekton.dev/v1beta1
+        kind: task
         name: set-image-tag
       params:
         - name: commit
