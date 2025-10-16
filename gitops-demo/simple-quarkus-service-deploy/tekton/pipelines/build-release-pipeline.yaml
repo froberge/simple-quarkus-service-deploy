@@ -148,7 +148,8 @@ spec:
       workspaces:
         - name: output
           workspace: source
-      # runAfter:
+      runAfter:
+        - create-image-tag
       #   - build-app
     - name: patch-deployment-dev
       taskRef:
