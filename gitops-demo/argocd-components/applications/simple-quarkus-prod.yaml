@@ -4,11 +4,16 @@ metadata:
   name: simple-quarkus-prod
 spec:
   project: simple-quarkus
+  destination:
+    namespace: simple-quarkus-prod
+    server: https://kubernetes.default.svc
   source:
     path: gitops-demo/simple-quarkus-service-deploy/app/overlays/prod
     repoURL: https://github.com/froberge/simple-quarkus-service-deploy.git
     targetRevision: main
-  destination:
-    namespace: simple-quarkus-prod
-    server: https://kubernetes.default.svc
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
