@@ -67,8 +67,14 @@ spec:
           workspace: source
     - name: create-image-tag
       taskRef:
-        kind: task
-        name: set-image-tag
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: set-image-tag
+          - name: namespace
+            value: openshift-pipsimple-quarkus-pipeline
       params:
         - name: commit
           value: $(tasks.clone-code-repo.results.COMMIT)
