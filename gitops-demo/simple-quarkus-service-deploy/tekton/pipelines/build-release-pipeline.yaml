@@ -154,8 +154,14 @@ spec:
         - build-app
     - name: patch-deployment-dev
       taskRef:
-        apiVersion: tekton.dev/v1
-        name: kustomize
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: kustomize
+          - name: namespace
+            value: simple-quarkus-pipeline
       params:
         - name: imagestream
           value: $(tasks.create-image-tag.results.tag)
@@ -198,9 +204,14 @@ spec:
         - patch-deployment-dev
     - name: patch-deployment-prod
       taskRef:
-        apiVersion: tekton.dev/v1
-        kind: task      
-        name: kustomize
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: kustomize
+          - name: namespace
+            value: simple-quarkus-pipeline
       params:
         - name: imagestream
           value: $(tasks.create-image-tag.results.tag)
