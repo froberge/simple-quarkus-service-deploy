@@ -182,6 +182,8 @@ spec:
           - name: namespace
             value: openshift-pipelines
       params:
+        - name: DELETE_EXISTING
+          value: 'false'
         - name: GIT_USER_NAME
           value: simple-quarkus-pipeline-bot
         - name: GIT_USER_EMAIL
