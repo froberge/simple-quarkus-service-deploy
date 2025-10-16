@@ -190,9 +190,12 @@ spec:
         - name: GIT_SCRIPT
           value: |
             echo "Current workspace contents:"
-            ls -alR /workspace/source/simple-quarkus-service-deploy | head -40
-            git config --global --add safe.directory /workspace/source
-            cd /workspace/source/simple-quarkus-service-deploy
+            ls -alR /workspace/source/ | head -50
+
+            REPO_DIR="simple-quarkus-service-deploy"
+            git config --global --add safe.directory /workspace/source/${REPO_DIR}
+            cd /workspace/source/${REPO_DIR}
+
             git add -A .
             git commit -am "Run $(tasks.create-image-tag.results.tagref): Updating image to $(tasks.create-image-tag.results.tag) on $(params.DEV_OVERLAY_DIR)"
             git push origin HEAD:main
