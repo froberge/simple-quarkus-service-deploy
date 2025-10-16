@@ -118,9 +118,9 @@ spec:
       params:
         - name: IMAGE
           value: $(tasks.create-image-tag.results.tag)
-        - name: TLSVERIFY
+        - name: TLS_VERIFY
           value: 'false'
-        - name: PATH_CONTEXT
+        - name: CONTEXT
           value: $(workspaces.source.path)
         - name: VERSION
           value: $(params.VERSION)
