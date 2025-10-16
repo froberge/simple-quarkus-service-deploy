@@ -99,7 +99,7 @@ spec:
             - 'clean'
             - 'test'
       workspaces:
-        - name: maven-settings
+        - name: maven_settings
           workspace: m2-repo
         - name: source
           workspace: source
