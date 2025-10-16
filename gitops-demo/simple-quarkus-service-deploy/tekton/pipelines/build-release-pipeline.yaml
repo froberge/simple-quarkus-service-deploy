@@ -99,8 +99,8 @@ spec:
             - 'clean'
             - 'test'
       workspaces:
-        - name: maven_settings
-          workspace: m2-repo
+        # - name: maven_settings
+        #   workspace: m2-repo
         - name: source
           workspace: source
       runAfter:
